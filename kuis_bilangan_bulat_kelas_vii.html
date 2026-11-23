@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kuis Bilangan Bulat • Kelas VII Fase D</title>
+<style>
+:root{--navy:#163a63;--blue:#2563a6;--pale:#eaf2fb;--ink:#1d2938;--muted:#64748b;--line:#d8e1ec;--white:#fff;--gray:#f2f5f8}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eaf2fb,#f6f8fb 55%,#e5eaf0);font-family:Inter,system-ui,Arial,sans-serif;color:var(--ink);min-height:100vh}
+header{background:var(--navy);color:white;padding:17px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.2px}.subbrand{font-size:12px;color:#d9e7f7;margin-top:3px}
+main{max-width:900px;margin:28px auto;padding:0 16px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,34px);box-shadow:0 12px 35px #183b6310}
+h1{font-size:clamp(24px,4vw,34px);margin:0 0 8px;color:var(--navy)}h2{margin:0 0 10px;color:var(--navy)}
+.muted{color:var(--muted);line-height:1.6}.teacher{font-weight:700;color:var(--blue)}
+label{display:block;font-weight:650;font-size:14px;margin:14px 0 6px}input,select{width:100%;padding:13px 14px;border:1px solid #cbd5e1;border-radius:11px;font:inherit;background:#fff}
+button{border:0;border-radius:11px;padding:12px 17px;font:inherit;font-weight:700;cursor:pointer;transition:.15s}
+button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--blue);color:white}.secondary{background:var(--pale);color:var(--navy);border:1px solid #d4e3f4}.ghost{background:transparent;color:white;border:1px solid #ffffff66}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hidden{display:none!important}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--pale);color:var(--navy);font-size:12px;font-weight:750}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.progress{height:8px;background:#e6edf5;border-radius:99px;overflow:hidden;margin:12px 0 20px}.progress>div{height:100%;background:var(--blue);width:0;transition:width .2s}
+.timer{font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}.timer.warn{color:#b45309}
+.question{font-size:21px;line-height:1.45;font-weight:750;margin:18px 0}
+.option{display:flex;align-items:flex-start;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;margin:9px 0;cursor:pointer;background:#fff}
+.option:hover{border-color:#80a9d3;background:#f8fbff}.option input{width:auto;margin-top:3px;accent-color:var(--blue)}
+.note{font-size:13px;color:var(--muted);margin-top:12px}.status{padding:12px;border-radius:12px;background:var(--gray);font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}td,th{padding:10px;border-bottom:1px solid var(--line);text-align:left}
+.site-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:#dce8f5;border-bottom:1px solid var(--line)}
+.site-nav a{text-decoration:none;color:var(--navy);font-weight:750;padding:8px 13px;border-radius:10px}
+.site-nav a:hover,.site-nav a[aria-current="page"]{background:var(--blue);color:white}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.question{font-size:18px}}
+</style></head>
+<body>
+<header><div><div class="brand">RUANG MATEMATIKA</div><div class="subbrand">Evaluasi Bilangan Bulat • Kelas VII Fase D</div></div>
+<button class="ghost" id="musicBtn" type="button">♫ Musik: Mati</button></header>
+<nav class="site-nav" aria-label="Navigasi utama">
+<a href="index.html">Ruang Bilangan</a>
+<a href="integer_adventure.html">Integer Adventure</a>
+<a href="kuis_bilangan_bulat_kelas_vii.html" aria-current="page">Kuis Bilangan Bulat</a>
+</nav>
+<main>
+<section class="panel" id="login">
+<span class="pill">20 soal • 2 menit per soal</span>
+<h1>Uji Pemahaman Bilangan Bulat</h1>
+<p class="muted">Evaluasi bertahap dari tingkat dasar hingga menantang. Bacalah setiap soal dengan teliti dan pilih satu jawaban.</p>
+<p>Pengajar: <span class="teacher">Kyara Awalia Ramadhani</span></p>
+<div class="grid"><div><label for="role">Masuk sebagai</label><select id="role"><option value="student">Siswa</option><option value="teacher">Pengajar</option></select></div><div><label for="code">Kode masuk</label><input id="code" type="password" placeholder="Masukkan kode"></div></div>
+<div id="studentFields" class="grid"><div><label for="studentName">Nama siswa</label><input id="studentName" maxlength="60" placeholder="Nama lengkap"></div><div><label for="className">Kelas</label><input id="className" maxlength="30" placeholder="Contoh: VII A"></div></div>
+<div class="actions"><button class="primary" id="enterBtn">Masuk</button></div>
+<div id="loginMsg" class="note" role="alert"></div>
+</section>
+<section class="panel hidden" id="quiz">
+<div class="topline"><span class="pill" id="level">Level 1 • Dasar</span><span class="timer" id="timer">02:00</span></div>
+<div class="topline"><strong id="qCount">Soal 1 dari 20</strong><span class="muted" id="studentLabel"></span></div>
+<div class="progress"><div id="progressBar"></div></div>
+<div class="question" id="questionText"></div><div id="options"></div>
+<p class="note" id="feedback" aria-live="polite">Pilih satu jawaban untuk mengaktifkan tombol berikutnya.</p>
+<div class="actions"><button class="primary" id="nextBtn" disabled>Jawab &amp; Lanjut</button></div>
+</section>
+<section class="panel hidden" id="done">
+<h2>Evaluasi selesai</h2><p class="muted">Terima kasih telah menyelesaikan seluruh soal. Jawabanmu sudah tercatat untuk pengajar.</p>
+<div class="status">Hasil akhir tidak ditampilkan pada akun siswa. Silakan akhiri sesi ini.</div>
+<div class="actions"><button class="secondary" id="finishBtn">Kembali ke menu utama</button></div>
+</section>
+<section class="panel hidden" id="teacher">
+<h2>Panel Pengajar</h2><p class="muted">Pengajar: <b>Kyara Awalia Ramadhani</b></p>
+<p class="status">Unduh rekap hasil evaluasi siswa dalam format CSV yang dapat dibuka di Excel. Panel ini hanya tersedia setelah kode pengajar benar.</p>
+<div id="resultSummary" class="muted">Belum ada hasil tersimpan pada sesi browser ini.</div>
+<div class="actions"><button class="primary" id="downloadBtn">Unduh hasil (CSV)</button><button class="secondary" id="deleteBtn">Hapus seluruh hasil</button><button class="secondary" id="logoutBtn">Keluar</button></div>
+</section>
+</main><footer>Evaluasi pembelajaran • Bilangan Bulat • Fase D</footer>
+<script>
+const questions=[
+{l:"Dasar",q:"Hasil dari 8 + (−5) adalah …",o:["−13","−3","3","13"],a:2},
+{l:"Dasar",q:"Bilangan yang terletak 4 satuan di sebelah kiri angka 1 pada garis bilangan adalah …",o:["−5","−3","3","5"],a:1},
+{l:"Dasar",q:"Di antara bilangan berikut, yang nilainya paling kecil adalah …",o:["−2","0","−7","4"],a:2},
+{l:"Dasar",q:"Hasil dari −6 + (−9) adalah …",o:["−15","−3","3","15"],a:0},
+{l:"Dasar",q:"Lawan dari bilangan −18 adalah …",o:["−18","0","9","18"],a:3},
+{l:"Menengah",q:"Hasil dari 14 − (−8) adalah …",o:["6","−6","22","−22"],a:2},
+{l:"Menengah",q:"Hasil dari (−7) × 6 adalah …",o:["−42","−13","13","42"],a:0},
+{l:"Menengah",q:"Hasil dari (−56) ÷ (−8) adalah …",o:["−8","−7","7","8"],a:2},
+{l:"Menengah",q:"Urutan bilangan dari yang terkecil adalah …",o:["−1, −4, 2, 5","−4, −1, 2, 5","5, 2, −1, −4","−4, 2, −1, 5"],a:1},
+{l:"Menengah",q:"Suhu mula-mula −3°C. Suhu naik 11°C, lalu turun 5°C. Suhu akhir adalah …",o:["−19°C","−3°C","3°C","13°C"],a:2},
+{l:"Lanjut",q:"Nilai dari −18 + 4 × 6 adalah …",o:["−84","−42","6","12"],a:2},
+{l:"Lanjut",q:"Nilai dari (−36 ÷ 4) − (−7) adalah …",o:["−16","−2","2","16"],a:1},
+{l:"Lanjut",q:"Sebuah lift berada di lantai 3. Lift turun 8 lantai, lalu naik 5 lantai. Sekarang lift berada di lantai …",o:["−10","−5","0","1"],a:3},
+{l:"Lanjut",q:"Hasil dari 5 × [−3 + (−4)] adalah …",o:["−35","−5","5","35"],a:0},
+{l:"Lanjut",q:"Bilangan bulat x memenuhi x − 9 = −15. Nilai x adalah …",o:["−24","−6","6","24"],a:1},
+{l:"Menantang",q:"Nilai dari {−24 + [6 × (−3)]} ÷ 3 adalah …",o:["−14","−10","−2","10"],a:0},
+{l:"Menantang",q:"Dalam kuis, jawaban benar bernilai +4 dan salah −2. Rani menjawab 12 soal: 9 benar dan 3 salah. Total nilainya …",o:["24","30","36","42"],a:1},
+{l:"Menantang",q:"Sebuah kapal selam berada 35 m di bawah permukaan laut. Kapal naik 12 m, turun 18 m, lalu naik 9 m. Posisi akhirnya …",o:["−50 m","−32 m","−26 m","−14 m"],a:2},
+{l:"Menantang",q:"Jika −4 × (p − 3) = 28, nilai p adalah …",o:["−10","−4","4","10"],a:1},
+{l:"Menantang",q:"Suhu kota A −6°C. Suhu kota B 4°C lebih rendah dari A, sedangkan suhu kota C 9°C lebih tinggi dari B. Pernyataan yang benar adalah …",o:["B = −2°C dan C = 7°C","B = −10°C dan C = −1°C","B = 2°C dan C = 11°C","B = −10°C dan C = 3°C"],a:1}
+];
+const $=id=>document.getElementById(id),AUTH_KEY="ruangBilanganSession_v1";let index=0,chosen=null,remaining=120,tick=null,answers=[],student={},audioCtx=null,oscillators=[],musicOn=false,musicTimer=null,musicMaster=null,musicStep=0,auth=null;
+try{auth=JSON.parse(sessionStorage.getItem(AUTH_KEY)||"null")}catch(e){auth=null}
+if(!auth||(auth.role!=="student"&&auth.role!=="teacher")||!auth.name)location.replace("index.html");
+function show(id){["login","quiz","done","teacher"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
+$("role").addEventListener("change",()=>{$("studentFields").classList.toggle("hidden",$("role").value!=="student")});
+$("enterBtn").onclick=()=>{
+ const role=$("role").value,code=$("code").value.trim();
+ if(role==="student"){
+  if(code!=="SISWA2026")return $("loginMsg").textContent="Kode siswa tidak sesuai.";
+  const name=$("studentName").value.trim(),cls=$("className").value.trim();
+  if(!name||!cls)return $("loginMsg").textContent="Lengkapi nama dan kelas terlebih dahulu.";
+  student={name,cls};sessionStorage.setItem(AUTH_KEY,JSON.stringify({role:"student",name,cls}));index=0;answers=[];$("studentLabel").textContent=name+" • "+cls;show("quiz");render();
+ }else{
+  if(code!=="KYARA2026")return $("loginMsg").textContent="Kode pengajar tidak sesuai.";
+  sessionStorage.setItem(AUTH_KEY,JSON.stringify({role:"teacher",name:"Kyara Awalia Ramadhani",cls:""}));
+  show("teacher");updateTeacher();
+ }
+};
+function render(){
+ chosen=null;remaining=120;$("nextBtn").disabled=true;$("feedback").textContent="Pilih satu jawaban untuk mengaktifkan tombol berikutnya.";
+ const q=questions[index];$("level").textContent="Level "+(index<5?1:index<10?2:index<15?3:4)+" • "+q.l;
+ $("qCount").textContent="Soal "+(index+1)+" dari 20";$("progressBar").style.width=(index/20*100)+"%";$("questionText").textContent=q.q;
+ $("options").innerHTML="";
+ q.o.forEach((v,i)=>{const lab=document.createElement("label");lab.className="option";const inp=document.createElement("input");inp.type="radio";inp.name="answer";inp.value=i;inp.addEventListener("change",()=>{chosen=i;$("nextBtn").disabled=false;$("feedback").textContent="Jawaban dipilih. Tekan “Jawab & Lanjut” untuk mengirim.";});lab.append(inp,document.createTextNode(v));$("options").append(lab);});
+ clearInterval(tick);paintTimer();tick=setInterval(()=>{remaining--;paintTimer();if(remaining<=0){clearInterval(tick);answers[index]=null;index++;if(index>=20)complete();else render();}},1000);
+}
+function paintTimer(){let m=String(Math.floor(remaining/60)).padStart(2,"0"),s=String(remaining%60).padStart(2,"0");$("timer").textContent=m+":"+s;$("timer").classList.toggle("warn",remaining<=20);}
+$("nextBtn").onclick=()=>{if(chosen===null)return;answers[index]=chosen;clearInterval(tick);index++;if(index>=20)complete();else render();};
+function complete(){clearInterval(tick);answers.length=20;let all=JSON.parse(sessionStorage.getItem("quizResults")||"[]");all.push({name:student.name,cls:student.cls,date:new Date().toLocaleString("id-ID"),answers:answers.slice(),score:answers.reduce((n,a,i)=>n+(a===questions[i].a?1:0),0)});sessionStorage.setItem("quizResults",JSON.stringify(all));show("done");}
+$("finishBtn").onclick=()=>{clearInterval(tick);location.href="index.html";};
+function updateTeacher(){const r=JSON.parse(sessionStorage.getItem("quizResults")||"[]");$("resultSummary").textContent=r.length?`Terdapat ${r.length} hasil pengerjaan tersimpan pada browser ini.`:"Belum ada hasil tersimpan pada sesi browser ini.";$ ("deleteBtn").disabled=!r.length;}
+$("downloadBtn").onclick=()=>{const r=JSON.parse(sessionStorage.getItem("quizResults")||"[]");if(!r.length){alert("Belum ada hasil untuk diunduh.");return;}const header=["Nama","Kelas","Waktu","Skor dari 20",...questions.map((q,i)=>"Jawaban "+(i+1))];const rows=r.map(x=>[x.name,x.cls,x.date,x.score+"/20",...x.answers.map((a,i)=>a===null?"Tidak dijawab":questions[i].o[a])]);const csv=[header,...rows].map(row=>row.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="hasil-kuis-bilangan-bulat.csv";a.click();URL.revokeObjectURL(url);};
+$("deleteBtn").onclick=()=>{if(!confirm("Hapus seluruh hasil evaluasi yang tersimpan pada browser ini? Tindakan ini tidak dapat dibatalkan."))return;sessionStorage.removeItem("quizResults");updateTeacher();};
+$("logoutBtn").onclick=()=>{sessionStorage.removeItem(AUTH_KEY);location.href="index.html";};
+function musicStart(){
+ try{
+  audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();
+  musicMaster=audioCtx.createGain();musicMaster.gain.value=.13;musicMaster.connect(audioCtx.destination);
+  const melody=[659.25,587.33,523.25,587.33,659.25,659.25,659.25,587.33,587.33,587.33,659.25,783.99,783.99,698.46,659.25,587.33];
+  const chords=[[261.63,329.63,392.00],[220.00,261.63,329.63],[174.61,220.00,261.63],[196.00,246.94,293.66]];
+  function pluck(freq,when,duration,volume,type){const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.type=type||"sine";osc.frequency.setValueAtTime(freq,when);gain.gain.setValueAtTime(.0001,when);gain.gain.exponentialRampToValueAtTime(volume,when+.035);gain.gain.exponentialRampToValueAtTime(.0001,when+duration);osc.connect(gain);gain.connect(musicMaster);osc.start(when);osc.stop(when+duration+.03);oscillators.push(osc);}
+  function beat(){const now=audioCtx.currentTime;const note=melody[musicStep%melody.length];pluck(note,now,.34,.19,"triangle");pluck(note/2,now,.55,.055,"sine");
+   if(musicStep%4===0){const chord=chords[Math.floor(musicStep/4)%chords.length];chord.forEach((f,i)=>pluck(f,now+i*.025,1.65,.035,"sine"));}
+   musicStep++;
+  }
+  beat();musicTimer=setInterval(beat,430);musicOn=true;$("musicBtn").textContent="♫ Musik: Nyala";
+ }catch(e){$("musicBtn").textContent="Musik tidak tersedia";}
+}
+function musicStop(){if(musicTimer){clearInterval(musicTimer);musicTimer=null;}if(musicMaster){const now=audioCtx.currentTime;musicMaster.gain.cancelScheduledValues(now);musicMaster.gain.setTargetAtTime(.0001,now,.04);setTimeout(()=>{try{musicMaster.disconnect();}catch(e){}},250);musicMaster=null;}oscillators=[];musicOn=false;$("musicBtn").textContent="♫ Musik: Mati";}
+$("musicBtn").onclick=()=>musicOn?musicStop():musicStart();
+if(auth&&auth.role==="student"){student={name:auth.name,cls:auth.cls||""};$("studentLabel").textContent=student.name+" • "+student.cls;show("quiz");render();}
+else if(auth&&auth.role==="teacher"){show("teacher");updateTeacher();}
+</script></body></html>
