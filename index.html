@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ruang Bilangan — Bilangan Bulat Kelas VII</title>
+<style>
+:root{--navy:#173b68;--blue:#2878c8;--sky:#eaf4ff;--ink:#203247;--muted:#64748b;--line:#d8e3ef;--white:#fff;--bg:#f4f7fb;--gray:#eef2f6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(120deg,#15365f,#2878c8);color:white;padding:22px max(5vw,20px);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:46px;height:46px;border-radius:14px;background:#ffffff24;display:grid;place-items:center;font-size:25px}
+h1{font-size:clamp(23px,4vw,34px);margin:0}header p{margin:3px 0 0;color:#e0efff}.music{border:1px solid #ffffff77;background:#ffffff18;color:white;padding:9px 14px;border-radius:12px;cursor:pointer}
+main{max-width:1120px;margin:28px auto;padding:0 18px}.panel,.card{background:white;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px #183b6810}
+.login{max-width:540px;margin:42px auto;padding:28px}.eyebrow{color:var(--blue);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+h2{margin:4px 0 14px;color:var(--navy);font-size:25px}h3{color:var(--navy);margin:0 0 8px}
+label{display:block;font-weight:700;margin:12px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #cbd8e6;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+button{border:0;border-radius:11px;padding:11px 16px;background:var(--blue);color:white;font-weight:750;cursor:pointer}button:hover{filter:brightness(.96)}button.secondary{background:#e9f2fc;color:var(--navy)}button.danger{background:#fff0f0;color:#a32b2b}
+.note{font-size:13px;color:var(--muted)}.error{color:#b42318;font-weight:700;margin-top:10px}
+.hidden{display:none!important}.toprow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:18px}.side{padding:14px;height:max-content;position:sticky;top:14px}.navbtn{display:block;width:100%;text-align:left;margin:5px 0;background:transparent;color:var(--ink)}.navbtn.active,.navbtn:hover{background:var(--sky);color:var(--navy)}
+.content{padding:24px;min-height:500px}.hero{background:linear-gradient(125deg,#eaf4ff,#f7fbff);border:1px solid #d4e7fa;border-radius:16px;padding:22px;margin-bottom:18px}.hero strong{color:var(--navy)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.tile{padding:18px;border-radius:15px;background:#f7faff;border:1px solid var(--line)}.tile .big{font-size:28px;font-weight:850;color:var(--blue)}
+.topic{padding:16px;border:1px solid var(--line);border-radius:14px;margin:12px 0;background:#fff}.formula{background:#eef6ff;border-left:4px solid var(--blue);padding:12px 15px;border-radius:8px;font-size:17px;font-weight:700;color:var(--navy)}
+table{border-collapse:collapse;width:100%;font-size:14px;margin-top:12px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left}th{background:#eef5fc;color:var(--navy)}
+.resource{padding:12px;border:1px solid var(--line);border-radius:11px;margin:8px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pill{display:inline-block;background:#eaf4ff;color:#1b5b98;border-radius:99px;padding:4px 10px;font-size:12px;font-weight:800}
+.quizopt{display:block;width:100%;text-align:left;margin:8px 0;background:#f2f7fc;color:var(--ink);border:1px solid var(--line)}.quizopt.correct{background:#e7f7ee;border-color:#66bd87}.quizopt.wrong{background:#fff0f0;border-color:#e28a8a}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:13px}
+.site-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:10px max(5vw,20px);background:#eaf4ff;border-bottom:1px solid var(--line)}
+.site-nav a{text-decoration:none;color:var(--navy);font-weight:750;padding:8px 13px;border-radius:10px}
+.site-nav a:hover,.site-nav a[aria-current="page"]{background:var(--blue);color:white}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.side{position:static;display:grid;grid-template-columns:repeat(2,1fr)}.content{padding:17px}.login{margin:20px auto;padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">➗</div><div><h1>Ruang Bilangan</h1><p>Media pembelajaran interaktif · Matematika Kelas VII Fase D</p></div></div><button class="music" id="musicBtn" onclick="toggleMusic()">♫ Musik: Mati</button></header>
+<main>
+<section id="login" class="panel login">
+<div class="eyebrow">Selamat datang di ruang belajar</div><h2>Masuk ke Ruang Kelas</h2>
+<p>Pelajari bilangan bulat melalui materi, contoh, latihan, dan presensi kelas.</p>
+<label for="role">Masuk sebagai</label><select id="role"><option value="student">Siswa</option><option value="teacher">Pengajar</option></select>
+<div id="studentFields"><label for="studentName">Nama siswa</label><input id="studentName" placeholder="Masukkan nama lengkap"><label for="studentClass">Kelas</label><input id="studentClass" placeholder="Contoh: VII A"></div>
+<label for="accessCode">Kode masuk</label><input id="accessCode" type="password" placeholder="Masukkan kode akses">
+<button style="width:100%;margin-top:18px" onclick="enterRoom()">Masuk kelas</button><div id="loginError" class="error"></div>
+
+</section>
+<section id="app" class="hidden">
+<nav class="site-nav" aria-label="Navigasi utama">
+<a href="index.html" aria-current="page">Ruang Bilangan</a>
+<a href="integer_adventure.html">Integer Adventure</a>
+<a href="kuis_bilangan_bulat_kelas_vii.html">Kuis Bilangan Bulat</a>
+</nav>
+<div class="toprow"><div><span class="pill" id="roleBadge">SISWA</span><h2 id="welcome" style="margin:6px 0 0">Ruang Kelas</h2><div class="note">Pengajar: Kyara Awalia Ramadhani</div></div><button class="secondary" onclick="logout()">Keluar</button></div>
+<div class="layout"><aside class="panel side" id="nav"></aside><section class="panel content" id="view"></section></div>
+</section>
+</main><footer>Ruang Bilangan · Disusun untuk pembelajaran Bilangan Bulat Kelas VII Fase D<br>Pengajar: Kyara Awalia Ramadhani</footer>
+<script>
+const $=id=>document.getElementById(id);
+let user=null, current='home', audioCtx=null, musicOn=false, musicTimer=null, musicStep=0, musicGain=null, quizIndex=0, quizScore=0;
+const KEY='ruangBilanganData_v1';
+const AUTH_KEY='ruangBilanganSession_v1';
+function db(){try{return JSON.parse(localStorage.getItem(KEY))||{attendance:[],resources:[]}}catch(e){return{attendance:[],resources:[]}}}
+function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+$('role').addEventListener('change',()=>{$('studentFields').classList.toggle('hidden',$('role').value==='teacher')});
+function enterRoom(){
+ let role=$('role').value, code=$('accessCode').value.trim();
+ if(role==='student'){
+  if(code!=='SISWA2026')return $('loginError').textContent='Kode siswa tidak sesuai.';
+  let name=$('studentName').value.trim(), cls=$('studentClass').value.trim();
+  if(!name||!cls)return $('loginError').textContent='Nama dan kelas wajib diisi.';
+  user={role,name,cls};
+ }else{if(code!=='KYARA2026')return $('loginError').textContent='Kode pengajar tidak sesuai.';user={role:'teacher',name:'Kyara Awalia Ramadhani'};}
+ sessionStorage.setItem(AUTH_KEY,JSON.stringify(user));
+ openRoom();
+}
+function openRoom(){
+ let role=user.role;
+ $('loginError').textContent='';$('login').classList.add('hidden');$('app').classList.remove('hidden');
+ $('roleBadge').textContent=role==='teacher'?'PENGAJAR':'SISWA';$('welcome').textContent=role==='teacher'?'Dashboard Pengajar':'Halo, '+user.name+'!';
+ buildNav();render('home');
+}
+function logout(){sessionStorage.removeItem(AUTH_KEY);user=null;$('app').classList.add('hidden');$('login').classList.remove('hidden');$('accessCode').value='';}
+const studentMenu=[['home','⌂','Beranda'],['materi','▤','Materi'],['contoh','✎','Contoh Soal'],['latihan','✓','Latihan & Evaluasi'],['presensi','◷','Presensi Saya']];
+const teacherMenu=[['home','⌂','Dashboard'],['materi','▤','Kelola Materi'],['contoh','✎','Kelola Contoh Soal'],['latihan','✓','Kelola Latihan'],['presensi','◷','Presensi Siswa'],['resources','↥','Semua Unggahan']];
+function buildNav(){let menu=user.role==='teacher'?teacherMenu:studentMenu;$('nav').innerHTML=menu.map(([id,ic,n])=>`<button class="navbtn ${current===id?'active':''}" onclick="render('${id}')">${ic} &nbsp; ${n}</button>`).join('');}
+function render(page){current=page;buildNav();let v=$('view');
+ if(page==='home')v.innerHTML=user.role==='teacher'?teacherHome():studentHome();
+ if(page==='materi')v.innerHTML=user.role==='teacher'?managePage('materi','Materi Pembelajaran'):studentResources('materi','Materi Pembelajaran');
+ if(page==='contoh')v.innerHTML=user.role==='teacher'?managePage('contoh','Contoh Soal'):studentResources('contoh','Contoh Soal');
+ if(page==='latihan')v.innerHTML=user.role==='teacher'?managePage('latihan','Latihan & Evaluasi'):quizPage();
+ if(page==='presensi')v.innerHTML=user.role==='teacher'?attendanceTeacher():attendanceStudent();
+ if(page==='resources')v.innerHTML=allResources();
+}
+function studentHome(){return `<div class="hero"><div class="eyebrow">Petualangan matematika dimulai!</div><h2>Kenali Bilangan Bulat</h2><p>Bilangan bulat hadir di sekitar kita: suhu, ketinggian, skor permainan, dan perubahan uang.</p><strong>Tujuan belajar:</strong> memahami bilangan positif, negatif, nol, membandingkan, mengurutkan, serta melakukan operasi hitung bilangan bulat.</div><div class="grid"><div class="tile"><div class="big">01</div><b>Pahami konsep</b><p class="note">Mulai dari garis bilangan dan nilai bilangan.</p></div><div class="tile"><div class="big">02</div><b>Amati contoh</b><p class="note">Pelajari langkah penyelesaian soal.</p></div><div class="tile"><div class="big">03</div><b>Uji pemahaman</b><p class="note">Kerjakan latihan dan evaluasi.</p></div></div><div class="topic"><h3>Petunjuk belajar</h3>Gunakan menu di samping secara berurutan. Jangan lupa mengisi presensi sebelum belajar.</div>`}
+function teacherHome(){let d=db();return `<div class="hero"><div class="eyebrow">Panel pengajar</div><h2>Selamat datang, Kyara!</h2><p>Kelola bahan ajar, contoh soal, latihan, dan pantau presensi siswa di ruang kelas ini.</p></div><div class="grid"><div class="tile"><div class="big">${d.attendance.length}</div><b>Catatan presensi</b></div><div class="tile"><div class="big">${d.resources.length}</div><b>Unggahan bahan ajar</b></div><div class="tile"><div class="big">VII</div><b>Fase D</b></div></div><div class="topic"><h3>Mulai mengelola kelas</h3>Pilih menu Kelola Materi, Kelola Contoh Soal, atau Kelola Latihan untuk menambahkan tautan dan file. Gunakan menu Presensi Siswa untuk melihat kehadiran.</div>`}
+function lessonContent(){return `<div class="hero"><div class="eyebrow">Materi inti</div><h2>Bilangan Bulat</h2><p>Bilangan bulat terdiri atas bilangan bulat negatif, nol, dan bilangan bulat positif.</p></div>
+<div class="topic"><h3>1. Mengenal bilangan bulat</h3><p>Bilangan positif lebih besar dari nol, bilangan negatif lebih kecil dari nol, sedangkan nol bukan bilangan positif maupun negatif.</p><div class="formula">… −3, −2, −1, 0, 1, 2, 3 …</div></div>
+<div class="topic"><h3>2. Garis bilangan</h3><p>Pada garis bilangan, semakin ke kanan nilai bilangan semakin besar. Semakin ke kiri nilainya semakin kecil.</p><svg viewBox="0 0 620 105" width="100%" role="img" aria-label="Garis bilangan dari negatif tiga sampai positif tiga"><line x1="45" y1="48" x2="575" y2="48" stroke="#2878c8" stroke-width="4"/><path d="M575 48l-13 -8v16z" fill="#2878c8"/><g fill="#173b68" font-size="15" text-anchor="middle">${[-3,-2,-1,0,1,2,3].map((n,i)=>`<circle cx="${55+i*82}" cy="48" r="6" fill="#2878c8"/><text x="${55+i*82}" y="78">${n}</text>`).join('')}</g></svg><p class="note">Contoh: −2 terletak di sebelah kiri 1, sehingga −2 lebih kecil daripada 1.</p></div>
+<div class="topic"><h3>3. Membandingkan dan mengurutkan</h3><p>Gunakan tanda lebih dari (&gt;), kurang dari (&lt;), atau sama dengan (=).</p><div class="formula">−5 &lt; −2 &lt; 0 &lt; 3 &lt; 7</div><p>Urutan naik dimulai dari nilai terkecil menuju terbesar.</p></div>
+<div class="topic"><h3>4. Operasi penjumlahan dan pengurangan</h3><ul><li>Bilangan bertanda sama: jumlahkan nilainya dan pertahankan tandanya.</li><li>Bilangan berbeda tanda: kurangkan nilai mutlaknya dan gunakan tanda bilangan dengan nilai mutlak lebih besar.</li><li>Pengurangan dapat diubah menjadi penjumlahan lawan bilangan: a − b = a + (−b).</li></ul><div class="formula">(−4) + (−3) = −7<br>(−6) + 9 = 3<br>5 − (−2) = 5 + 2 = 7</div></div>
+<div class="topic"><h3>5. Perkalian dan pembagian</h3><p>Tanda hasil kali atau hasil bagi:</p><div class="formula">(+ × +) = + &nbsp; | &nbsp; (− × −) = +<br>(+ × −) = − &nbsp; | &nbsp; (− × +) = −</div><p>Contoh: (−3) × 4 = −12 dan (−20) ÷ (−5) = 4.</p></div>
+<div class="topic"><h3>6. Penerapan dalam kehidupan</h3><p>Suhu −3°C berarti 3 derajat di bawah 0°C. Jika suhu naik 5°C, suhu akhirnya −3 + 5 = 2°C.</p></div>`}
+function managePage(type,title){let d=db(),items=d.resources.filter(x=>x.type===type);return `<div class="toprow"><div><div class="eyebrow">Ruang pengajar</div><h2>${title}</h2></div><span class="pill">${items.length} item</span></div><div class="topic"><h3>Tambah ${title}</h3><label>Judul</label><input id="resTitle" placeholder="Contoh: Pengantar bilangan bulat"><label>Deskripsi singkat (opsional)</label><textarea id="resDesc" rows="2" placeholder="Keterangan bahan ajar"></textarea><label>Tautan (opsional)</label><input id="resUrl" placeholder="https://..."><label>Upload file (opsional)</label><input id="resFile" type="file"><p class="note">Tambahkan tautan atau file. File disimpan di penyimpanan browser perangkat ini; gunakan tautan untuk berbagi ke perangkat siswa.</p><button onclick="addResource('${type}')">Simpan bahan</button><div id="uploadMsg" class="note"></div></div><h3>Daftar ${title}</h3>${items.length?items.map(resourceRow).join(''):'<p class="note">Belum ada bahan yang ditambahkan.</p>'}`}
+function addResource(type){let title=$('resTitle').value.trim();if(!title){$('uploadMsg').textContent='Judul harus diisi.';return}let file=$('resFile').files[0],url=$('resUrl').value.trim();if(!file&&!url){$('uploadMsg').textContent='Tambahkan tautan atau pilih file.';return}
+ const persist=(dataUrl='')=>{let d=db();d.resources.push({id:Date.now(),type,title,desc:$('resDesc').value.trim(),url,fileName:file?.name||'',dataUrl,date:new Date().toLocaleString('id-ID')});save(d);render(type);};
+ if(file){if(file.size>2*1024*1024){$('uploadMsg').textContent='Ukuran file maksimal 2 MB untuk penyimpanan browser. Unggah file yang lebih besar ke layanan penyimpanan lalu tempel tautannya.';return}let reader=new FileReader();reader.onload=()=>persist(reader.result);reader.readAsDataURL(file)}else persist();
+}
+function resourceRow(x){return `<div class="resource"><div><b>${esc(x.title)}</b><div class="note">${esc(x.desc||'')}${x.fileName?' · File: '+esc(x.fileName):''}</div><div class="note">${x.date||''}</div></div><div>${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener">Buka tautan</a>`:''} ${x.dataUrl?`<a href="${x.dataUrl}" download="${esc(x.fileName)}">Unduh file</a>`:''} ${user.role==='teacher'?`<button class="danger" onclick="deleteResource(${x.id})">Hapus</button>`:''}</div></div>`}
+function deleteResource(id){let d=db();d.resources=d.resources.filter(x=>x.id!==id);save(d);render(current)}
+function studentResources(type,title){let d=db(),items=d.resources.filter(x=>x.type===type);return `<div class="eyebrow">Ruang belajar siswa</div><h2>${title}</h2>${type==='materi'?lessonContent():''}${items.length?'<h3>Bahan tambahan dari pengajar</h3>'+items.map(resourceRow).join(''):'<p class="note">Belum ada tambahan dari pengajar.</p>'}`}
+const questions=[{q:'Bilangan yang terletak 4 satuan di sebelah kiri nol adalah …',o:['4','−4','0','−5'],a:1,e:'Empat satuan di kiri nol menunjukkan bilangan −4.'},{q:'Manakah hubungan yang benar?',o:['−7 > −2','−3 < −5','−6 < 1','0 < −1'],a:2,e:'Semua bilangan negatif lebih kecil daripada bilangan positif.'},{q:'Hasil dari (−8) + 5 adalah …',o:['−13','−3','3','13'],a:1,e:'Nilai mutlak 8 lebih besar daripada 5, sehingga hasilnya negatif: −3.'},{q:'Hasil dari 6 − (−4) adalah …',o:['2','−10','10','−2'],a:2,e:'Mengurangi bilangan negatif sama dengan menambahkan lawannya: 6 + 4 = 10.'},{q:'Suhu −2°C naik 7°C. Suhu sekarang adalah …',o:['−9°C','−5°C','5°C','9°C'],a:2,e:'−2 + 7 = 5°C.'},{q:'Hasil dari (−3) × (−5) adalah …',o:['−15','15','−8','8'],a:1,e:'Perkalian dua bilangan negatif menghasilkan bilangan positif.'}];
+function quizPage(){return `<div class="eyebrow">Cek pemahaman</div><h2>Latihan & Evaluasi</h2><p>Jawab enam pertanyaan berikut. Pilih satu jawaban pada setiap soal.</p><div class="topic" id="quizBox"><div class="pill" id="qCount">Soal 1 dari ${questions.length}</div><h3 id="qText" style="margin-top:12px"></h3><div id="qOptions"></div><p id="qFeedback" aria-live="polite"></p><button id="nextQ" class="hidden" onclick="nextQuestion()">Soal berikutnya</button></div>`}
+function startQuiz(){quizIndex=0;quizScore=0;showQuestion()}
+function showQuestion(){let q=questions[quizIndex];$('qCount').textContent=`Soal ${quizIndex+1} dari ${questions.length}`;$('qText').textContent=q.q;$('qFeedback').textContent='';$('nextQ').classList.add('hidden');$('qOptions').innerHTML=q.o.map((o,i)=>`<button class="quizopt" onclick="answer(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+function answer(i){let q=questions[quizIndex],buttons=[...$('qOptions').querySelectorAll('button')];buttons.forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('correct');if(j===i&&i!==q.a)b.classList.add('wrong')});if(i===q.a)quizScore++;$('qFeedback').textContent=(i===q.a?'Benar! ':'Belum tepat. ')+q.e;$('nextQ').textContent=quizIndex===questions.length-1?'Lihat hasil':'Soal berikutnya';$('nextQ').classList.remove('hidden')}
+function nextQuestion(){quizIndex++;if(quizIndex>=questions.length){$('quizBox').innerHTML=`<h2>Evaluasi selesai!</h2><div class="big" style="font-size:42px;color:var(--blue)">${quizScore}/${questions.length}</div><p>Nilai: ${Math.round(quizScore/questions.length*100)}. ${quizScore>=5?'Hebat! Pertahankan pemahamanmu.':'Terus berlatih dan pelajari kembali materi.'}</p><button onclick="startQuiz()">Ulangi latihan</button>`}else showQuestion()}
+function attendanceStudent(){let d=db(),mine=d.attendance.find(x=>x.name===user.name&&x.cls===user.cls&&x.date===new Date().toLocaleDateString('id-ID'));return `<div class="eyebrow">Kehadiran kelas</div><h2>Presensi Saya</h2><div class="topic"><p>Nama: <b>${esc(user.name)}</b><br>Kelas: <b>${esc(user.cls)}</b><br>Tanggal: <b>${new Date().toLocaleDateString('id-ID')}</b></p>${mine?`<span class="pill">Presensi hari ini: ${esc(mine.status)}</span><p class="note">Dicatat pada pukul ${esc(mine.time)}.</p>`:`<label for="attendanceStatus">Pilih keterangan kehadiran</label><select id="attendanceStatus"><option value="Hadir">Hadir</option><option value="Izin">Izin</option><option value="Sakit">Sakit</option><option value="Alpa">Alpa</option></select><button style="margin-top:14px" onclick="markAttendance()">Kirim presensi</button>`}<p id="attMsg" class="note"></p></div>`}
+function markAttendance(){let status=$('attendanceStatus')?.value||'Hadir',d=db(),today=new Date().toLocaleDateString('id-ID');if(!d.attendance.some(x=>x.name===user.name&&x.cls===user.cls&&x.date===today)){d.attendance.push({name:user.name,cls:user.cls,date:today,time:new Date().toLocaleTimeString('id-ID'),status});save(d)}render('presensi')}
+function attendanceTeacher(){let d=db();return `<div class="eyebrow">Rekap kelas</div><h2>Presensi Siswa</h2><p class="note">Data yang tampil adalah catatan pada browser/perangkat ini.</p><button class="secondary" onclick="downloadAttendance()">Unduh rekap CSV</button>${d.attendance.length?`<table><thead><tr><th>Nama</th><th>Kelas</th><th>Tanggal</th><th>Waktu</th><th>Status</th></tr></thead><tbody>${d.attendance.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.cls)}</td><td>${x.date}</td><td>${x.time}</td><td>${x.status}</td></tr>`).join('')}</tbody></table>`:'<p class="note">Belum ada presensi tercatat.</p>'}`}
+function downloadAttendance(){let rows=[['Nama','Kelas','Tanggal','Waktu','Status'],...db().attendance.map(x=>[x.name,x.cls,x.date,x.time,x.status])];downloadCsv('Rekap_Presensi_Siswa.csv',rows)}
+function allResources(){let d=db();return `<div class="eyebrow">Pusat bahan ajar</div><h2>Semua Unggahan</h2>${d.resources.length?d.resources.map(resourceRow).join(''):'<p class="note">Belum ada unggahan.</p>'}`}
+function downloadCsv(name,rows){let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+// Musik latar instrumental sederhana: melodi lembut berulang dengan iringan arpeggio.
+const melody=[523.25,659.25,783.99,659.25,587.33,698.46,880,698.46,523.25,659.25,783.99,1046.5,880,783.99,659.25,587.33];
+const harmony=[261.63,329.63,392,329.63,293.66,349.23,440,349.23,261.63,329.63,392,523.25,440,392,329.63,293.66];
+function playMusicNote(freq,when,duration,volume,type='sine'){
+ const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+ osc.type=type;osc.frequency.setValueAtTime(freq,when);
+ gain.gain.setValueAtTime(0.0001,when);gain.gain.exponentialRampToValueAtTime(volume,when+0.035);gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
+ osc.connect(gain);gain.connect(musicGain);osc.start(when);osc.stop(when+duration+0.03);
+}
+function musicTick(){
+ if(!musicOn||!audioCtx)return;
+ const now=audioCtx.currentTime, i=musicStep%melody.length;
+ playMusicNote(melody[i],now,0.42,0.055,'sine');
+ playMusicNote(harmony[i],now,0.58,0.022,'triangle');
+ if(i%4===0)playMusicNote(harmony[i]/2,now,0.72,0.018,'sine');
+ musicStep++;musicTimer=setTimeout(musicTick,460);
+}
+function toggleMusic(){
+ if(musicOn){musicOn=false;if(musicTimer)clearTimeout(musicTimer);if(audioCtx)audioCtx.suspend();$('musicBtn').textContent='♫ Musik: Mati';return}
+ try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();
+  if(!musicGain){musicGain=audioCtx.createGain();musicGain.gain.value=0.22;musicGain.connect(audioCtx.destination)}
+  musicOn=true;$('musicBtn').textContent='♫ Musik: Nyala';musicTick();
+ }catch(e){$('musicBtn').textContent='Musik tidak didukung'}
+}
+</script>
+<script>
+// Initialize quiz when its menu is opened.
+const originalRender=render;
+render=function(page){originalRender(page);if(page==='latihan'&&user.role==='student')startQuiz();}
+try{
+ const saved=JSON.parse(sessionStorage.getItem(AUTH_KEY)||'null');
+ if(saved&&(saved.role==='student'||saved.role==='teacher')&&saved.name){
+  user=saved;
+  openRoom();
+ }
+}catch(e){sessionStorage.removeItem(AUTH_KEY);}
+</script>
+</body></html>
